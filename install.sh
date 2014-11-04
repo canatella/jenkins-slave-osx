@@ -21,7 +21,7 @@ OSX_KEYCHAIN="login.keychain"
 OSX_KEYCHAIN_PASS=""
 JAVA_ARGS=${JAVA_ARGS:-""}
 INSTALL_TMP=`mktemp -d -q -t org.jenkins-ci.slave.jnlp`
-DOWNLOADS_PATH=https://raw.github.com/rhwood/jenkins-slave-osx/master
+DOWNLOADS_PATH=https://raw.github.com/canatella/jenkins-slave-osx/master
 
 function create_user() {
 	# see if user exists
@@ -158,7 +158,7 @@ function configure_daemon {
 	sudo -i -u ${SERVICE_USER} ${SERVICE_WRKSPC}/security.sh set-password --password=${KEYSTORE_PASS} --account=${SERVICE_USER} --service=java_truststore
 	if [ "$PROTOCOL" == "https" ]; then
 		echo "
-If the certificate for ${MASTER_NAME} is not trusted by Java, you will need 
+If the certificate for ${MASTER_NAME} is not trusted by Java, you will need
 to install public certificates required for Java to trust ${MASTER_NAME}.
 NOTE: The installer is not capable of testing that Java trusts ${MASTER_NAME}.
 
@@ -261,7 +261,7 @@ function create_keychain {
 		fi
 		sudo chmod 777 ${KEYCHAINS}
 		sudo sh -c "echo 'OSX_KEYCHAIN_PASS=${OSX_KEYCHAIN_PASS}' > ${KEYCHAINS}/.keychain_pass"
-		sudo chown -R ${SERVICE_USER}:${SERVICE_GROUP} ${KEYCHAINS} 
+		sudo chown -R ${SERVICE_USER}:${SERVICE_GROUP} ${KEYCHAINS}
 		sudo chmod 400 ${KEYCHAINS}/.keychain_pass
 		sudo chmod 755 ${KEYCHAINS}
 	fi
@@ -345,13 +345,13 @@ function rawurlencode() {
 		esac
 		encoded+="${o}"
 	done
-	echo "${encoded}"    # You can either set a return variable (FASTER) 
+	echo "${encoded}"    # You can either set a return variable (FASTER)
 	REPLY="${encoded}"   #+or echo the result (EASIER)... or both... :p
 }
 
 echo "
-        _          _   _              _ _  _ _    ___   ___ _              
-     _ | |___ _ _ | |_(_)_ _  ___  _ | | \| | |  | _ \ / __| |__ ___ _____ 
+        _          _   _              _ _  _ _    ___   ___ _
+     _ | |___ _ _ | |_(_)_ _  ___  _ | | \| | |  | _ \ / __| |__ ___ _____
     | || / -_) ' \| / / | ' \(_-< | || | .\` | |__|  _/ \__ \ / _\` \ V / -_)
      \__/\___|_||_|_\_\_|_||_/__/  \__/|_|\_|____|_|   |___/_\__,_|\_/\___|
 
@@ -377,7 +377,7 @@ if [[ "${CONFIRM}" =~ ^[Yy] ]] ; then
 		cleanup 1
 	fi
 	create_user
-	
+
 	# $@ must be quoted in order to handle arguments that contain spaces
 	# see http://stackoverflow.com/a/8198970/14731
 	process_args "$@"
