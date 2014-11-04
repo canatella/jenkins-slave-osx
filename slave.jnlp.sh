@@ -1,6 +1,6 @@
 #!/bin/bash
 
-JENKINS_HOME=$( dirname $0 )
+JENKINS_HOME=$( dirname $0 )/../../..
 JENKINS_CONF=${JENKINS_HOME}/Library/Preferences/org.jenkins-ci.slave.jnlp.conf
 #JENKINS_WRKSPC=${HOME}/Library/Developer/org.jenkins-ci.slave.jnlp
 JENKINS_WRKSPC=${JENKINS_HOME}
@@ -80,7 +80,7 @@ RESULT=-1
 if [[ -f $JAVA_TRUSTSTORE ]]; then
 	JAVA_TRUSTSTORE_PASS=$( ${JENKINS_WRKSPC}/security.sh get-password --account=`whoami` --service=java_truststore ${AGENT} )
 	JAVA_ARGS_LOG="${JAVA_ARGS} -Djavax.net.ssl.trustStore=${JAVA_TRUSTSTORE} -Djavax.net.ssl.trustStorePassword=********"
-	JAVA_ARGS="${JAVA_ARGS} -Djavax.net.ssl.trustStore=${JAVA_TRUSTSTORE} -Djavax.net.ssl.trustStorePassword=${JAVA_TRUSTSTORE_PASS}" 
+	JAVA_ARGS="${JAVA_ARGS} -Djavax.net.ssl.trustStore=${JAVA_TRUSTSTORE} -Djavax.net.ssl.trustStorePassword=${JAVA_TRUSTSTORE_PASS}"
 fi
 # The user and API token are required for Jenkins >= 1.498
 if [ ! -z ${JENKINS_USER} ]; then
